@@ -1,40 +1,36 @@
-
-from .repositories import AdresseRepository, PersonnRepository
-
+"""[summary]."""
 from .database import db
+from .repositories import PersonnRepository
 
 
 class Personne:
+    """[summary]."""
+
     objects = PersonnRepository(db)
 
-    def __init__(self, name, forename, phone_number, email, adresse):
+    def __init__(self, name, forename, email):
+        """[summary].
+
+        Arguments:
+            name {[type]} -- [description]
+            forename {[type]} -- [description]
+            email {[type]} -- [description]
+        """
         self.name = name
         self.forename = forename
-        self.phone_number = phone_number
         self.email = email
-        self.adresse = adresse
         self.id = None
-
-
-class Adresse:
-    objects = AdresseRepository(db)
-
-    def __init__(self, street, country, postal_code, number, persons):
-        self.street = street
-        self.country = country
-        self.postal_code = postal_code
-        self.number = number
-        self.persons = persons
-        self.id = None
-        self
 
 
 if __name__ == "__main__":
-    # new_adresse = AdresseRepository.create()
-    new_personne = Personne.objects.create(
-        "Dupin",
-        "Christophe",
-        "0644182848",
-        "mail@moi.com",
-        "189 avenue Jean Jaures",
-    )
+    b = Personne("antoine", "Dupin", "antoine@moi.fr")
+    data = {
+        "name": b.name,
+        "forname": b.forename,
+        "email": b.email,
+    }
+    # b.objects.create(data)
+    a = b.objects.get_all()
+    c = b.objects.select_by_field_name("name")
+    for r in c:
+        print(r)
