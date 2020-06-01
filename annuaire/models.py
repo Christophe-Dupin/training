@@ -24,13 +24,5 @@ class Personne:
 
 if __name__ == "__main__":
     b = Personne("antoine", "Dupin", "antoine@moi.fr")
-    data = {
-        "name": b.name,
-        "forname": b.forename,
-        "email": b.email,
-    }
-    # b.objects.create(data)
+    b.objects.create(b.name, b.forename, b.email)
     a = b.objects.get_all()
-    c = b.objects.select_by_field_name("name")
-    for r in c:
-        print(r)
